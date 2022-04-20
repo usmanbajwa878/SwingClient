@@ -1,5 +1,4 @@
 import SplashScreen from 'react-native-splash-screen';
-
 import React, {Component} from 'react';
 import {Text, View, Platform, Button,SafeAreaView} from 'react-native';
 import IAP from 'react-native-iap';
@@ -25,30 +24,31 @@ export default class App extends Component {
   componentWillMount() {
     // step 1 - connect store
     IAP.initConnection()
-      .catch(() => {
-        console.log('-- Error connnecting to Store... ---');
-      })
+     
       .then(() => {
         console.log('-- Connected to Store... ---');
         // step 2 - fetch subscription or products
         IAP.getSubscriptions(items)
-          .catch(() => {
-            console.log('-- Error fetching subscription... ---');
-          })
+       
           .then((response) => {
             this.setState({subscription: response});
             console.log('--- subscriptionn... ---', this.state.subscription);
-          });
-      });
+          }).catch(() => {
+            
+            console.log('-- Error fetching subscription... ---');
+          })
+      }).catch(() => {
+        console.log('-- Error connnecting to Store... ---');
+      })
 
     IAP.getPurchaseHistory()
-      .catch(() => {})
+     
       .then((response) => {
         const reciptt = response[response.length - 1].transactionReceipt;
         if (reciptt) {
           this.validate(reciptt);
         }
-      });
+      }) .catch(() => {})
 
     purchaseUpdatedListener = IAP.purchaseUpdatedListener((purchase) => {
       try {
@@ -93,7 +93,7 @@ export default class App extends Component {
           const renewalRecipt = res.latest_receipt_info;
           const expiration = renewalRecipt[0].expires_date_ms;
           console.log('expiration', expiration);
-          let expired = Date.now() > expiration;
+          // let expired = Date.now() > expiration;
           console.log('expired', expired);
           if (!expired) {
             console.log('Subscription -----> Not Expired');
@@ -118,7 +118,7 @@ export default class App extends Component {
         // if user is not sign in to apple account in app user will ask first to login if user cancel we will handle it here
         console.log('err', err);
       });
-  };
+   };
 
   componentDidMount() {
     SplashScreen.hide();

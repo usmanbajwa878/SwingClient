@@ -36,7 +36,7 @@ class Subscription extends Component {
 
   componentDidMount() {
     console.log('Calling inap from subscription');
-    InApp.Init();
+    // InApp.Init();
   }
 
   componentWillUnmount() {
@@ -128,14 +128,14 @@ class Subscription extends Component {
   };
 
   renderLogo() {
-    return (
-      <View style={styles.logoContainer}>
-        <Image source={Images.icons.logo} style={styles.logo} />
-        <Text style={styles.logoText}>
-          Forex signals Pro Monthly Subscription
-        </Text>
-      </View>
-    );
+    // return (
+    //   <View style={styles.logoContainer}>
+    //     <Image source={Images.icons.logo} style={styles.logo} />
+    //     <Text style={styles.logoText}>
+    //       Forex signals Pro Monthly Subscription
+    //     </Text>
+    //   </View>
+    // );
   }
 
   renderDetails() {

@@ -58,11 +58,11 @@ class Login extends Component {
           DataHandler.setUserSubscribe(is_subscribe);
           this.setState({ loading: false });
         } else {
-          this.props.navigation.navigate('Subscription', { id: uid })
+          this.props.navigation.navigate('DrawerScreen', { id: uid })
           this.setState({ loading: false });
         }
       } else {
-        this.props.navigation.navigate('Subscription', { id: uid })
+        this.props.navigation.navigate('DrawerScreen', { id: uid })
         this.setState({ loading: false });
       }
     })
